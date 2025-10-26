@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QA Automation Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background-color: #4CAF50; color: white; }
+    .pass { color: green; font-weight: bold; }
+    .fail { color: red; font-weight: bold; }
+    .skipped { color: orange; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>QA Automation Dashboard</h1>
+  {% if results %}
+  <table>
+    <thead>
+      <tr>
+        <th>Test Name</th>
+        <th>Status</th>
+        <th>Duration (s)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for test in results %}
+      <tr>
+        <td>{{ test.name }}</td>
+        <td class="{{ test.outcome }}">{{ test.outcome }}</td>
+        <td>{{ "%.2f"|format(test.duration) }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <p>No test results found. Run your Ecommerce tests and generate JSON first.</p>
+  {% endif %}
+</body>
+</html>
